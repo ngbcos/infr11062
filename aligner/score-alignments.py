@@ -45,9 +45,9 @@ for (i, (f_e, g, a)) in enumerate(zip(open(opts.bitext), open(opts.alignment), s
       sys.stdout.write("\n")
     sys.stdout.write("\n")
 
-precision = size_a_and_p / size_a
-recall = size_a_and_s / size_s
-aer = 1 - ((size_a_and_s + size_a_and_p) / (size_a + size_s))
+precision = size_a_and_p / size_a if size_a > 0 else 0
+recall = size_a_and_s / size_s if size_s > 0 else 0
+aer = 1 - ((size_a_and_s + size_a_and_p) / (size_a + size_s)) if (size_a + size_s) > 0 else 0
 sys.stdout.write("Precision = %f\nRecall = %f\nAER = %f\n" % (precision, recall, aer))
 
 for _ in (sys.stdin): # avoid pipe error
